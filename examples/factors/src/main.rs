@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#![doc = include_str!("../README.md")]
+
 use factors_methods::{MULTIPLY_ELF, MULTIPLY_ID};
 use risc0_zkvm::{
     serde::{from_slice, to_vec},
