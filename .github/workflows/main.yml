@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, 'release-*' ]
   pull_request:
-    branches: [ main, 'release-*' ]
+    branches: [ main, 'release-*', daisy/graviton_nvidia_fix ]
 
   workflow_dispatch:
 
@@ -59,9 +59,9 @@ jobs:
           - os: macOS
             feature: metal
             device: apple_m2_pro
-          # - os: Linux
-          #   feature: cuda
-          #   device: nvidia_tesla_t4g
+          - os: Linux
+            feature: cuda
+            device: nvidia_tesla_t4g
     env:
       CUDA_LIBRARY_PATH: /usr/lib/cuda
       FEATURE: ${{ matrix.feature }}
