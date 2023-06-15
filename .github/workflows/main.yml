@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, 'release-*' ]
-  pull_request:
     branches: [ main, 'release-*', daisy/graviton_nvidia_fix ]
+  pull_request:
+    branches: [ main, 'release-*' ]
 
   workflow_dispatch:
 
