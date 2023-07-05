@@ -14,7 +14,7 @@
 
 use std::{fs::File, path::Path};
 
-use reqwest::{blocking::Client as BlockingClient, header};
+use reqwest::{header, Client};
 use thiserror::Error;
 
 use self::responses::{CreateSessRes, ImgUploadRes, ProofReq, SessionStatusRes, UploadRes};
