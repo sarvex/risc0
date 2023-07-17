@@ -29,9 +29,8 @@ EXTENSIONS = [
 ]
 
 SKIP_DIRS = [
-    str(Path.cwd()) + "/templates/rust-starter",
-    # Groth16 verifier implementaion uses circom generated code under GPL3.
-    str(Path.cwd()) + "/bonsai/ethereum/contracts/groth16",
+    f"{str(Path.cwd())}/templates/rust-starter",
+    f"{str(Path.cwd())}/bonsai/ethereum/contracts/groth16",
 ]
 
 def check_header(expected_year, lines_actual):
@@ -47,8 +46,7 @@ def check_file(root, file):
     expected_year = subprocess.check_output(cmd, encoding='UTF-8').strip()
     rel_path = file.relative_to(root)
     lines = file.read_text().splitlines()
-    result = check_header(expected_year, lines)
-    if result:
+    if result := check_header(expected_year, lines):
         print(f'{rel_path}: invalid header!')
         print(f'  expected: {result[0]}')
         print(f'    actual: {result[1]}')
@@ -75,11 +73,7 @@ def main():
     ret = 0
     for path in tracked_files():
         if path.suffix in EXTENSIONS:
-            skip = False
-            for path_start in SKIP_DIRS:
-                if str(path).startswith(path_start):
-                    skip = True
-                    break
+            skip = any(str(path).startswith(path_start) for path_start in SKIP_DIRS)
             if skip:
                 continue
 
